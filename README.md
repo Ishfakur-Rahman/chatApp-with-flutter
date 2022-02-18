@@ -1,0 +1,29 @@
+<<<<<<< HEAD
+# chatApp-with-flutter
+=======
+<<<<<<< HEAD
+# chatApp-with-flutter
+=======
+<<<<<<< HEAD
+# demo_Chat
+This is demo project. just to learn flutter advanced cloud data management.
+=======
+# flutter_flash_chat
+
+A new Flutter application.
+
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
+>>>>>>> 940b2f4 (this the chat app)
+>>>>>>> e72132b (chat app)
+>>>>>>> f0d6014 (chat app)
