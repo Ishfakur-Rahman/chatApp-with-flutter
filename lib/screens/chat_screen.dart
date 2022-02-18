@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
-
 final _fireStore = FirebaseFirestore.instance;
 late User loggedInUser;
 
@@ -34,7 +33,6 @@ class _ChatScreenState extends State<ChatScreen> {
       }
     } catch (e) {}
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +84,8 @@ class _ChatScreenState extends State<ChatScreen> {
                       _fireStore.collection('messages').add({
                         'text': textMessages,
                         'sender': loggedInUser.email,
-                        'times' : DateFormat('dd-MM-yyyy KK:mm:ss').format(DateTime.now()),
+                        'times': DateFormat('dd-MM-yyyy KK:mm:ss')
+                            .format(DateTime.now()),
                       });
                     },
                     child: Text(
@@ -119,6 +118,7 @@ class MessagesStream extends StatelessWidget {
         }
         final _message = snapshot.requireData.docs;
         List<MessageDesign> messageWidgets = [];
+        
         for (var _messageDetails in _message) {
           final messageText = _messageDetails['text'];
           final messageSender = _messageDetails['sender'];
@@ -130,11 +130,13 @@ class MessagesStream extends StatelessWidget {
           } else {
             isMe = false;
           }
+          //TODO: make this messageWidget as a map where key will be date
+          //TODO: this date will be using to order the list in DESCENDING ORDER
           final messageWidget = MessageDesign(
-            message: messageText,
-            sender: messageSender,
-            isMe: isMe,
-          );
+              message: messageText,
+              sender: messageSender,
+              isMe: isMe,
+            );
 
           messageWidgets.add(messageWidget);
         }
