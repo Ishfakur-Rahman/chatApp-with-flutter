@@ -1,4 +1,5 @@
 import 'package:flash_chat/constants.dart';
+import 'package:flash_chat/screens/error_screen.dart';
 import 'chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/componenets/rounded_button.dart';
@@ -22,6 +23,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       _newUser = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       return true;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        messages = 'The password provided is too weak';
+      } else if (e.code == 'email-already-in-use') {
+        messages = 'The account already exist for that email';
+      }
+      // Navigator.pushNamed(
+      //   context,
+      //   ErrorGenerator.id,
+      //   arguments: ErrorGenerator().setErrorMessage(messages),
+      // );
+      return false;
     } catch (e) {
       messages = 'Valid email address required';
       return false;

@@ -25,8 +25,12 @@ class _LoginScreenState extends State<LoginScreen>
       _existUser = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       return true;
-    } catch (e) {
-      messages = e.toString();
+    }on FirebaseAuthException catch (e){
+      if(e.code == 'user-not-found'){
+        messages='No user found for that email! Register Now!';
+      }else if(e.code == 'wrong-password'){
+        messages = 'Wrong password! Try again';
+      }
       return false;
     }
   }

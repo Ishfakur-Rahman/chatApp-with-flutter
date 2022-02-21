@@ -107,7 +107,10 @@ class MessagesStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: _fireStore.collection('messages').snapshots(),
+      stream: _fireStore
+          .collection('messages')
+          .orderBy('times',)
+          .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(
@@ -116,9 +119,9 @@ class MessagesStream extends StatelessWidget {
             ),
           );
         }
-        final _message = snapshot.requireData.docs;
+        final _message = snapshot.requireData.docs.reversed;
         List<MessageDesign> messageWidgets = [];
-        
+
         for (var _messageDetails in _message) {
           final messageText = _messageDetails['text'];
           final messageSender = _messageDetails['sender'];
@@ -130,18 +133,17 @@ class MessagesStream extends StatelessWidget {
           } else {
             isMe = false;
           }
-          //TODO: make this messageWidget as a map where key will be date
-          //TODO: this date will be using to order the list in DESCENDING ORDER
           final messageWidget = MessageDesign(
-              message: messageText,
-              sender: messageSender,
-              isMe: isMe,
-            );
+            message: messageText,
+            sender: messageSender,
+            isMe: isMe,
+          );
 
           messageWidgets.add(messageWidget);
         }
         return Expanded(
           child: ListView(
+            reverse: true,
             padding: EdgeInsets.symmetric(
               horizontal: 10.0,
               vertical: 20.0,
